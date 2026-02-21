@@ -6,6 +6,7 @@ import { AuthStackNavigator } from './SignInScreen.tsx'
 import { AxiosError } from 'axios'
 import ErrorMessage from '../components/ErrorMessage.tsx'
 import client from '../api/Client.ts'
+import { useAuth } from '../context/AuthProvider.tsx'
 
 interface Props {}
 export type errorType = Record<string, string[] | undefined>
@@ -21,13 +22,14 @@ const SignUpScreen: FC<Props> = () => {
     const [error, setError] = useState('')
 
     const navigation = useNavigation<NavigationProp<AuthStackNavigator>>()
+    const { login } = useAuth()
 
     const handleSubmit = async () => {
         setError('')
         setErrors({})
         try {
-            const { data } = await client.post(`/auth/sign-up`, signUpInfo)
-            console.log(data)
+            await client.post(`/auth/sign-up`, signUpInfo)
+            await login({ email: signUpInfo.email, password: signUpInfo.password })
         } catch (error) {
             if (error instanceof AxiosError) {
                 const responseData = error.response?.data
@@ -40,6 +42,7 @@ const SignUpScreen: FC<Props> = () => {
             }
         }
     }
+
     return (
         <FormContainer
             btnTitle={'Sign Up'}

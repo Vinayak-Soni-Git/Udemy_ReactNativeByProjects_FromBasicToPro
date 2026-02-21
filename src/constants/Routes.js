@@ -5,4 +5,5 @@ export const ApplicationRoutes = {
     EcomSignInScreen: 'SignInScreen',
     EcomSignUpScreen: 'SignUpScreen',
     EcomHomeScreen: 'HomeScreen',
+    EcomSingleProductScreen: 'SingleProductScreen',
 }

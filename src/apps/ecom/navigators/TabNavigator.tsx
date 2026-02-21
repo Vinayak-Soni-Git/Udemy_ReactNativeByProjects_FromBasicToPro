@@ -2,7 +2,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import HomeScreen from '../screens/HomeScreen.tsx'
 import CartScreen from '../screens/CartScreen.tsx'
 import ProfileScreen from '../screens/ProfileScreen.tsx'
-import FavScreen from '../screens/Fav.tsx'
+import FavScreen from '../screens/FavScreen.tsx'
 import { FontAwesome } from '@react-native-vector-icons/fontawesome'
 import { View } from 'react-native'
 import { ComponentProps } from 'react'
@@ -24,9 +24,9 @@ const renderTab = (iconName: IconName, focused: boolean) => {
 
 export default function TabNavigator() {
     return (
-        <Tab.Navigator>
+        <Tab.Navigator screenOptions={{ headerShown: false }}>
             <Tab.Screen
-                name="Home"
+                name="HomeScreen"
                 component={HomeScreen}
                 options={{
                     tabBarIcon: ({ focused }) => renderTab('home', focused),

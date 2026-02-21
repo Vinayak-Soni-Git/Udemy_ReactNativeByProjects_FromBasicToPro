@@ -1,12 +1,11 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useState } from 'react'
 import FormInput from '../components/FormInput.tsx'
 import FormContainer from '../components/FormContainer.tsx'
 import { NavigationProp, useNavigation } from '@react-navigation/core'
 import { errorType } from './SignUpScreen.tsx'
 import { AxiosError } from 'axios'
-import client from '../api/Client.ts'
 import ErrorMessage from '../components/ErrorMessage.tsx'
-import AsyncStorage from '@react-native-async-storage/async-storage/src/AsyncStorage.ts'
+import { useAuth } from '../context/AuthProvider.tsx'
 
 interface Props {}
 
@@ -24,15 +23,13 @@ const SignInScreen: FC<Props> = () => {
 
     const [errors, setErrors] = useState<errorType>({})
     const [error, setError] = useState('')
+    const {login} = useAuth()
 
     const handleSubmit = async () => {
         setError('')
         setErrors({})
         try {
-            // const { data } = await client.post(`/auth/sign-in`, signInInfo)
-            // await AsyncStorage.setItem('auth_token', data.token)
-            // navigation.navigate('HomeScreen', { profile: data.profile })
-            navigation.navigate('HomeScreen', {profile: {name:'John', email: 'John@example.com'}})
+            await login(signInInfo)
         } catch (error) {
             if (error instanceof AxiosError) {
                 const responseData = error.response?.data
