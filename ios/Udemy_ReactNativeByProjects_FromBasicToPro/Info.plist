@@ -55,5 +55,9 @@
 		<string>Orbitron-ExtraBold.ttf</string>
 		<string>PTSerif-Regular.ttf</string>
 	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+    <string>Pic Editor needs this permission to access photo library</string>
+    <key>NSCameraUsageDescription</key>
+    <string>Pic Editor needs this permission to take from camera</string>
 </dict>
 </plist>

@@ -14,6 +14,7 @@ const AppText: FC<Props> = ({ children, ...props }) => {
 const styles = StyleSheet.create({
     text: {
         color: 'white',
+        fontFamily:'PTSerif-Regular'
     },
 })
 

@@ -14,20 +14,26 @@ const permissionsAboveAndroid13 = [READ_MEDIA_IMAGES, CAMERA]
 export const requestImageReadWritePermissions = async () => {
     if (Platform.OS !== 'android') return
 
-    let result :Record<string, PermissionStatus> = {}
+    let result: Record<string, PermissionStatus> = {}
 
     if (Platform.Version <= 28) {
-        await PermissionsAndroid.requestMultiple(permissionsBelowAndroid10)
+        result = await PermissionsAndroid.requestMultiple(
+            permissionsBelowAndroid10,
+        )
     }
     if (Platform.Version >= 33) {
-        await PermissionsAndroid.requestMultiple(permissionsAboveAndroid13)
+        result = await PermissionsAndroid.requestMultiple(
+            permissionsAboveAndroid13,
+        )
     } else {
-        await PermissionsAndroid.requestMultiple(permissionsBelowAndroid13)
+        result = await PermissionsAndroid.requestMultiple(
+            permissionsBelowAndroid13,
+        )
     }
-    let valid = false
+    let valid = true
     let never_ask = false
-    for(const key in result){
-        if(result[key] === 'never_ask_again'){
+    for (const key in result) {
+        if (result[key] === 'never_ask_again') {
             valid = false
             never_ask = true
             break
@@ -38,5 +44,5 @@ export const requestImageReadWritePermissions = async () => {
         }
     }
 
-    return {valid, never_ask}
+    return { valid, never_ask }
 }
