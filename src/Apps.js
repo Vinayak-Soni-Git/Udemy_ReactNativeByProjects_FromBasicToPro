@@ -1,8 +1,9 @@
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { StyleSheet, Text, View } from 'react-native'
+import { Alert, StyleSheet, Text, View } from 'react-native'
 import AppNavigationButton from './components/AppNavigationButton'
 import useClickSound from './hooks/useSound'
 import { ApplicationRoutes } from './constants/Routes'
+import { FontAwesome } from '@react-native-vector-icons/fontawesome'
 
 export default function Apps({ navigation }) {
     function navigateToAppScreen(appScreenName) {
@@ -35,22 +36,35 @@ export default function Apps({ navigation }) {
                         <AppNavigationButton
                             title={'Ecom App'}
                             onPress={() =>
-                                navigateToAppScreen(
-                                    ApplicationRoutes.EcomAppScreen,
-                                )
+                                // navigateToAppScreen(
+                                //     ApplicationRoutes.EcomAppScreen,
+                                // )
+                                Alert.alert('Not available at the moment')
                             }
                             clickIn={playClickSound}
                             clickOut={playClickSound}
                         />
                         <AppNavigationButton
                             title={'Image Editor'}
-                            onPress={null}
+                            onPress={() =>
+                                navigateToAppScreen(
+                                    ApplicationRoutes.ImageEditorApp,
+                                )
+                            }
                             clickIn={playClickSound}
                             clickOut={playClickSound}
                         />
                     </View>
                     <View style={styles.bottomText}>
-                        <Text>Made with love by Vinayak Soni</Text>
+                        <Text style={styles.copyrightText}>
+                            Made with{' '}
+                            <FontAwesome
+                                name={'heart'}
+                                color={'red'}
+                                size={15}
+                            />{' '}
+                            by Vinayak Soni
+                        </Text>
                     </View>
                 </View>
             </View>
@@ -107,5 +121,9 @@ const styles = StyleSheet.create({
     },
     bottomText: {
         alignSelf: 'baseline',
+    },
+    copyrightText: {
+        fontWeight: 'bold',
+        fontSize: 18,
     },
 })

@@ -11,7 +11,9 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		D3931E8F27AC4CAAAF7C9B17 /* Orbitron-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DCA8B2CDB64F48439AF9003C /* Orbitron-ExtraBold.ttf */; };
+		A9BE725F6A3347F1AABD8DF2 /* BetaniaPatmosIn-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 71A3B1C8A3184865AB558392 /* BetaniaPatmosIn-Regular.ttf */; };
+		2849B19AA55F4413A1382521 /* Orbitron-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0B528429BFF644D0BD3EA1D9 /* Orbitron-ExtraBold.ttf */; };
+		30AB7B03D7594D19B516BDC2 /* PTSerif-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FFB576E854F417CB32C1FEF /* PTSerif-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,7 +27,9 @@
 		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Udemy_ReactNativeByProjects_FromBasicToPro/AppDelegate.swift; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Udemy_ReactNativeByProjects_FromBasicToPro/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		DCA8B2CDB64F48439AF9003C /* Orbitron-ExtraBold.ttf */ = {isa = PBXFileReference; name = "Orbitron-ExtraBold.ttf"; path = "../src/assets/fonts/Orbitron-ExtraBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		71A3B1C8A3184865AB558392 /* BetaniaPatmosIn-Regular.ttf */ = {isa = PBXFileReference; name = "BetaniaPatmosIn-Regular.ttf"; path = "../src/assets/fonts/BetaniaPatmosIn-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		0B528429BFF644D0BD3EA1D9 /* Orbitron-ExtraBold.ttf */ = {isa = PBXFileReference; name = "Orbitron-ExtraBold.ttf"; path = "../src/assets/fonts/Orbitron-ExtraBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		0FFB576E854F417CB32C1FEF /* PTSerif-Regular.ttf */ = {isa = PBXFileReference; name = "PTSerif-Regular.ttf"; path = "../src/assets/fonts/PTSerif-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,7 +107,9 @@
 		A54CE1DA15D344A29FC71417 /* Resources */ = {
 			isa = "PBXGroup";
 			children = (
-				DCA8B2CDB64F48439AF9003C /* Orbitron-ExtraBold.ttf */,
+				71A3B1C8A3184865AB558392 /* BetaniaPatmosIn-Regular.ttf */,
+				0B528429BFF644D0BD3EA1D9 /* Orbitron-ExtraBold.ttf */,
+				0FFB576E854F417CB32C1FEF /* PTSerif-Regular.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -171,7 +177,9 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				D3931E8F27AC4CAAAF7C9B17 /* Orbitron-ExtraBold.ttf in Resources */,
+				A9BE725F6A3347F1AABD8DF2 /* BetaniaPatmosIn-Regular.ttf in Resources */,
+				2849B19AA55F4413A1382521 /* Orbitron-ExtraBold.ttf in Resources */,
+				30AB7B03D7594D19B516BDC2 /* PTSerif-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

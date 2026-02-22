@@ -51,7 +51,9 @@
 	<false/>
 	<key>UIAppFonts</key>
 	<array>
+		<string>BetaniaPatmosIn-Regular.ttf</string>
 		<string>Orbitron-ExtraBold.ttf</string>
+		<string>PTSerif-Regular.ttf</string>
 	</array>
 </dict>
 </plist>

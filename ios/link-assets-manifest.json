@@ -2,8 +2,16 @@
   "migIndex": 1,
   "data": [
     {
+      "path": "src/assets/fonts/BetaniaPatmosIn-Regular.ttf",
+      "sha1": "dca09b7a64aa02153ad6684d5e74f9f7f574a67a"
+    },
+    {
       "path": "src/assets/fonts/Orbitron-ExtraBold.ttf",
       "sha1": "44ed139f1dc77c6c599e3b2b6b5f0f19bd23ccaa"
+    },
+    {
+      "path": "src/assets/fonts/PTSerif-Regular.ttf",
+      "sha1": "9ea0ea4d9ed8fda292db458366dbd9af013eced7"
     }
   ]
 }

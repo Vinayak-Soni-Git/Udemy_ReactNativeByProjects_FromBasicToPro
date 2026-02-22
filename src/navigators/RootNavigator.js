@@ -8,6 +8,7 @@ import SignUpScreen from '../apps/ecom/screens/SignUpScreen'
 import HomeScreen from '../apps/ecom/screens/HomeScreen'
 import EcomAppScreen from '../apps/ecom/screens/EcomAppScreen'
 import SingleProductScreen from '../apps/ecom/screens/SingleProductScreen'
+import ImageEditorApp from '../apps/ImageEditor/screens/ImageEditorApp'
 
 const StackNavigator = createNativeStackNavigator()
 export default function RootNavigator() {
@@ -44,6 +45,11 @@ export default function RootNavigator() {
                 <StackNavigator.Screen
                     name={ApplicationRoutes.EcomSingleProductScreen}
                     component={SingleProductScreen}
+                />
+                <StackNavigator.Screen
+                    name={ApplicationRoutes.ImageEditorApp}
+                    component={ImageEditorApp}
+                    options={{ headerShown: false }}
                 />
             </StackNavigator.Navigator>
         </NavigationContainer>
