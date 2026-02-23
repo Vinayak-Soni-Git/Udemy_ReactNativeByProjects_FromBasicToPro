@@ -9,7 +9,7 @@ interface Props {
 
 const CustomAlertBox: FC<Props> = ({ children, visible = false, onClose }) => {
     return (
-        <Modal visible={visible} transparent={true} animationType={'slide'}>
+        <Modal visible={visible} transparent={true} onRequestClose={onClose} animationType={'slide'}>
             <Pressable style={styles.overlay} onPress={onClose}>
                 {children}
             </Pressable>
@@ -18,9 +18,9 @@ const CustomAlertBox: FC<Props> = ({ children, visible = false, onClose }) => {
 }
 
 const styles = StyleSheet.create({
-    container: {},
     overlay: {
-
+        flex:1,
+        justifyContent:'flex-end'
     },
 })
 

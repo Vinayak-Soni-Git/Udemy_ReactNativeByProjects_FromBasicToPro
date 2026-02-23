@@ -52,7 +52,7 @@ const NeverAskPermissionsAlertBox: FC<Props> = ({ visible, buttonProps, onClose 
 
 const styles = StyleSheet.create({
     container: {
-        width: '80%',
+        width: '90%',
         padding: 10,
         borderRadius: 8,
         gap: 20,

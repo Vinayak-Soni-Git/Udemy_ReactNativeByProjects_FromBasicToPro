@@ -124,6 +124,6 @@ const styles = StyleSheet.create({
     },
     copyrightText: {
         fontWeight: 'bold',
-        fontSize: 18,
+        fontSize: 15,
     },
 })
