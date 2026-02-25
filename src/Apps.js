@@ -1,11 +1,16 @@
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { Alert, StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import AppNavigationButton from './components/AppNavigationButton'
 import useClickSound from './hooks/useSound'
 import { ApplicationRoutes } from './constants/Routes'
 import { FontAwesome } from '@react-native-vector-icons/fontawesome'
+import { useState } from 'react'
+import CustomAlertBox from './apps/image_editor/components/CustomAlertBox'
+import SorryForInconvenience from './components/SorryForInconvenience'
 
 export default function Apps({ navigation }) {
+    const [showSorryForInconvenienceBox, setShowSorryForInconvenienceBox] =
+        useState(false)
     function navigateToAppScreen(appScreenName) {
         navigation.navigate(appScreenName)
     }
@@ -36,10 +41,7 @@ export default function Apps({ navigation }) {
                         <AppNavigationButton
                             title={'Ecom App'}
                             onPress={() =>
-                                // navigateToAppScreen(
-                                //     ApplicationRoutes.EcomAppScreen,
-                                // )
-                                Alert.alert('Not available at the moment')
+                                setShowSorryForInconvenienceBox(true)
                             }
                             clickIn={playClickSound}
                             clickOut={playClickSound}
@@ -55,6 +57,18 @@ export default function Apps({ navigation }) {
                             clickOut={playClickSound}
                         />
                     </View>
+                    <CustomAlertBox
+                        visible={showSorryForInconvenienceBox}
+                        onClose={() => setShowSorryForInconvenienceBox(false)}>
+                        <SorryForInconvenience
+                            message={
+                                'This area is not available right now. sorry for the inconvenience'
+                            }
+                            onPressOkButton={() =>
+                                setShowSorryForInconvenienceBox(false)
+                            }
+                        />
+                    </CustomAlertBox>
                     <View style={styles.bottomText}>
                         <Text style={styles.copyrightText}>
                             Made with{' '}

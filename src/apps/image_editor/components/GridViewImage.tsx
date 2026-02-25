@@ -3,11 +3,19 @@ import { View, Image, Pressable, StyleSheet, Animated } from 'react-native'
 import { FontAwesome } from '@react-native-vector-icons/fontawesome'
 import { BlurView } from '@react-native-community/blur'
 
-interface Props{
-    source:string
+interface Props {
+    source: string
+    onDeleteImage?(): void
+    onEditImage?(): void
+    onPress?(): void
 }
 
-const GridViewImage:FC<Props> = ({ source }) => {
+const GridViewImage: FC<Props> = ({
+    source,
+    onDeleteImage,
+    onEditImage,
+    onPress,
+}) => {
     const [showOverlay, setShowOverlay] = useState(false)
     const fadeAnim = useRef(new Animated.Value(0)).current
 
@@ -32,6 +40,7 @@ const GridViewImage:FC<Props> = ({ source }) => {
         <Pressable
             style={styles.container}
             onLongPress={handleLongPress}
+            onPress={onPress}
             delayLongPress={300}>
             <Image source={{ uri: source }} style={styles.image} />
 
@@ -44,11 +53,15 @@ const GridViewImage:FC<Props> = ({ source }) => {
                     />
 
                     <View style={styles.iconContainer}>
-                        <Pressable style={styles.iconButton}>
+                        <Pressable
+                            onPress={onEditImage}
+                            style={styles.iconButton}>
                             <FontAwesome name="edit" size={22} color="#fff" />
                         </Pressable>
 
-                        <Pressable style={styles.iconButton}>
+                        <Pressable
+                            onPress={onDeleteImage}
+                            style={styles.iconButton}>
                             <FontAwesome name="trash" size={22} color="#fff" />
                         </Pressable>
                     </View>

@@ -4,7 +4,7 @@ import { Pressable, Text, View, StyleSheet, Dimensions } from 'react-native'
 const OFFSET = 6
 const screenHeight = Dimensions.get('window').height
 const screenWidth = Dimensions.get('window').width
-export default function AppNavigationButton({ title = 'Press Me', onPress, clickIn, clickOut }) {
+export default function AppNavigationButton({ title = 'Press Me', onPress, clickIn=()=>{}, clickOut=()=>{} }) {
     const [pressed, setPressed] = useState(false)
 
     return (

@@ -6,5 +6,8 @@ export const ApplicationRoutes = {
     EcomSignUpScreen: 'SignUpScreen',
     EcomHomeScreen: 'HomeScreen',
     EcomSingleProductScreen: 'SingleProductScreen',
-    ImageEditorApp:'ImageEditorApp'
+    ImageEditorApp: 'ImageEditorApp',
+    ImageEditorHomeScreen: 'ImageEditorHomeScreen',
+    ImageEditorEditingCanvasScreen: 'ImageEditorEditingCanvasScreen',
+    ImageEditorImageCropper: 'ImageEditorImageCropper',
 }

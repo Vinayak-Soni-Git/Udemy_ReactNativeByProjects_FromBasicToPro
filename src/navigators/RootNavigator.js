@@ -8,7 +8,9 @@ import SignUpScreen from '../apps/ecom/screens/SignUpScreen'
 import HomeScreen from '../apps/ecom/screens/HomeScreen'
 import EcomAppScreen from '../apps/ecom/screens/EcomAppScreen'
 import SingleProductScreen from '../apps/ecom/screens/SingleProductScreen'
-import ImageEditorApp from '../apps/ImageEditor/screens/ImageEditorApp'
+import ImageEditorApp from '../apps/image_editor/screens/ImageEditorApp'
+import EditingCanvasScreen from '../apps/image_editor/screens/EditingCanvasScreen'
+import ImageCropper from '../apps/image_editor/image_cropper/ImageCropper'
 
 const StackNavigator = createNativeStackNavigator()
 export default function RootNavigator() {
@@ -49,6 +51,16 @@ export default function RootNavigator() {
                 <StackNavigator.Screen
                     name={ApplicationRoutes.ImageEditorApp}
                     component={ImageEditorApp}
+                    options={{ headerShown: false }}
+                />
+                <StackNavigator.Screen
+                    name={ApplicationRoutes.ImageEditorEditingCanvasScreen}
+                    component={EditingCanvasScreen}
+                    options={{ headerShown: false }}
+                />
+                <StackNavigator.Screen
+                    name={ApplicationRoutes.ImageEditorImageCropper}
+                    component={ImageCropper}
                     options={{ headerShown: false }}
                 />
             </StackNavigator.Navigator>

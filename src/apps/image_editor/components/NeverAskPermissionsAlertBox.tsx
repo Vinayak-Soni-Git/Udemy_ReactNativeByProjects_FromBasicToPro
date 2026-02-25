@@ -3,23 +3,33 @@ import { Pressable, StyleSheet, View } from 'react-native'
 import CustomAlertBox from './CustomAlertBox.tsx'
 import AppText from './AppText.tsx'
 import BulletList from './BulletList.tsx'
+import LottieView from 'lottie-react-native'
 
 interface Props {
     visible: boolean
-    onClose?():void
+    onClose?(): void
     buttonProps?: {
         titleOne: string
         titleTwo: string
         onPressOne?(): void
         onPressTwo?(): void
-    },
-
+    }
 }
 
-const NeverAskPermissionsAlertBox: FC<Props> = ({ visible, buttonProps, onClose }) => {
+const NeverAskPermissionsAlertBox: FC<Props> = ({
+    visible,
+    buttonProps,
+    onClose,
+}) => {
     return (
-        <CustomAlertBox visible={visible} onClose={onClose} >
+        <CustomAlertBox visible={visible} onClose={onClose}>
             <View style={styles.container}>
+                <LottieView
+                    source={require('../assest/lottie/camera_permission.json')}
+                    autoPlay={true}
+                    loop={true}
+                    style={styles.lottieAnimation}
+                />
                 <AppText style={styles.title}>
                     To use the complete features of this app your must give this
                     app these permissions
@@ -37,12 +47,20 @@ const NeverAskPermissionsAlertBox: FC<Props> = ({ visible, buttonProps, onClose 
                     />
                 </View>
                 <View style={styles.buttonsContainer}>
-                    <Pressable style={styles.button} onPress={buttonProps?.onPressOne} >
-                        <AppText style={styles.btnText}>{buttonProps?.titleOne}</AppText>
+                    <Pressable
+                        style={styles.button}
+                        onPress={buttonProps?.onPressOne}>
+                        <AppText style={styles.btnText}>
+                            {buttonProps?.titleOne}
+                        </AppText>
                     </Pressable>
 
-                    <Pressable style={styles.button} onPress={buttonProps?.onPressTwo} >
-                        <AppText style={styles.btnText}>{buttonProps?.titleTwo}</AppText>
+                    <Pressable
+                        style={styles.button}
+                        onPress={buttonProps?.onPressTwo}>
+                        <AppText style={styles.btnText}>
+                            {buttonProps?.titleTwo}
+                        </AppText>
                     </Pressable>
                 </View>
             </View>
@@ -86,6 +104,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         gap: 5,
+    },
+    lottieAnimation: {
+        width: 300,
+        height: 200,
+        alignSelf:'center'
     },
 })
 

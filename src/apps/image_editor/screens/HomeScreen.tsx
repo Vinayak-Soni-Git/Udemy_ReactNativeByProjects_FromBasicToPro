@@ -1,19 +1,17 @@
 import { FC, useEffect, useState } from 'react'
-import {
-    Image,
-    Linking,
-    Platform,
-    Pressable,
-    StyleSheet,
-    View,
-} from 'react-native'
+import { Linking, Platform, Pressable, StyleSheet } from 'react-native'
 import UserFirstVisit from '../components/UserFirstVisit.tsx'
 import { requestImageReadWritePermissions } from '../utils/Permissions.ts'
 import NeverAskPermissionsAlertBox from '../components/NeverAskPermissionsAlertBox.tsx'
-import { launchCamera, launchImageLibrary } from 'react-native-image-picker'
+import {
+    ImagePickerResponse,
+    launchCamera,
+    launchImageLibrary,
+} from 'react-native-image-picker'
 import {
     getLocalImages,
     LocalImage,
+    removeFile,
     saveImageToLocalDirectory,
 } from '../utils/FileHandler.ts'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -24,6 +22,8 @@ import { FontAwesome } from '@react-native-vector-icons/fontawesome'
 import CustomAlertBox from '../components/CustomAlertBox.tsx'
 import GridViewImage from '../components/GridViewImage.tsx'
 import ConfirmOptionsModal from '../components/ConfirmOptionsModal.tsx'
+import { NavigationProp, useNavigation } from '@react-navigation/core'
+import { ImageEditorStackNavigatorProps } from '../navigators/ImageEditorStackNavigatorProps.tsx'
 
 interface Props {}
 
@@ -34,6 +34,26 @@ const HomeScreen: FC<Props> = () => {
     const [isFirstVisit, setIsFirstVisit] = useState(false)
     const [images, setImages] = useState<LocalImage[]>([])
     const [showConfirmOptions, setShowConfirmOptions] = useState(false)
+    const [selectedImage, setSelectedImage] = useState<LocalImage | null>(null)
+    const navigation =
+        useNavigation<NavigationProp<ImageEditorStackNavigatorProps>>()
+
+    const navigateToEditingCanvas = (imageUri: string) => {
+        navigation.navigate('ImageEditorEditingCanvasScreen', {
+            image: imageUri,
+        })
+    }
+
+    const handleAfterImageSelection = async (data: ImagePickerResponse) => {
+        const { assets, didCancel } = data
+        if (!didCancel && assets) {
+            const asset = assets[0]
+            if (asset.uri) {
+                await saveImageToLocalDirectory(asset.uri)
+                navigateToEditingCanvas(asset.uri)
+            }
+        }
+    }
 
     const handleOnCapturePress = async () => {
         try {
@@ -46,15 +66,10 @@ const HomeScreen: FC<Props> = () => {
                     return setShowPermissionAlert(true)
                 }
             }
-            const { didCancel, assets, errorMessage } = await launchCamera({
+            const res = await launchCamera({
                 mediaType: 'photo',
             })
-            if (errorMessage) {
-                console.log(errorMessage)
-            }
-            if (!didCancel && assets) {
-                console.log(assets)
-            }
+            handleAfterImageSelection(res)
         } catch (error) {
             console.log()
             console.log(error)
@@ -81,47 +96,45 @@ const HomeScreen: FC<Props> = () => {
                     return setShowPermissionAlert(true)
                 }
             }
-            const { didCancel, assets, errorMessage } =
-                await launchImageLibrary({
-                    mediaType: 'photo',
-                    selectionLimit: 1,
-                })
-            if (errorMessage) {
-                console.log(errorMessage)
-            }
-            if (!didCancel && assets) {
-                const image = assets[0]
-                if (image.uri) {
-                    await saveImageToLocalDirectory(image.uri)
-                }
-            }
+            const res = await launchImageLibrary({
+                mediaType: 'photo',
+                selectionLimit: 1,
+            })
+            handleAfterImageSelection(res)
         } catch (error) {
             console.log(error)
         }
     }
 
     const scanLocalFiles = async () => {
-        return await getLocalImages()
+        return await getLocalImages().then(res => {
+            if (!res.length) {
+                setIsFirstVisit(true)
+            } else {
+                setImages(res)
+            }
+        })
     }
 
     const hideConfirmOptions = () => {
         setShowConfirmOptions(false)
+        setSelectedImage(null)
     }
 
     useEffect(() => {
-        scanLocalFiles()
-            .then(res => {
-                if (!res.length) {
-                    setIsFirstVisit(true)
-                } else {
-                    setImages(res)
-                }
-            })
-            .catch()
-            .finally(() => {
+        scanLocalFiles().finally(() => {
+            setTimeout(() => {
                 setIsReady(true)
-            })
+            }, 2000)
+        })
     }, [])
+
+    const handleOnImageRemove = async () => {
+        if (!selectedImage) return
+        await removeFile(selectedImage.path)
+        await scanLocalFiles()
+        hideConfirmOptions()
+    }
 
     if (!isReady)
         return (
@@ -167,13 +180,28 @@ const HomeScreen: FC<Props> = () => {
                 </AppText>
                 <GridView
                     data={images}
-                    renderItem={item => <GridViewImage source={item.path} />}
+                    renderItem={item => (
+                        <GridViewImage
+                            onPress={() => navigateToEditingCanvas(item.path)}
+                            onDeleteImage={() => {
+                                setSelectedImage(item)
+                                setShowConfirmOptions(true)
+                            }}
+                            source={item.path}
+                        />
+                    )}
                 />
             </SafeAreaView>
-            <CustomAlertBox visible={true} onClose={hideConfirmOptions}>
+            <CustomAlertBox
+                visible={showConfirmOptions}
+                onClose={hideConfirmOptions}>
                 <ConfirmOptionsModal
+                    regularBtnTitle={'Cancel'}
+                    destructiveBtnTitle={'Confirm'}
+                    onCancel={hideConfirmOptions}
+                    onConfirm={handleOnImageRemove}
                     title={
-                        'Are you sure to delete the project it will removed all saved progress?'
+                        'Are you sure to delete the project it will remove all saved progress?'
                     }
                 />
             </CustomAlertBox>
